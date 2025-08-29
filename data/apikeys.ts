@@ -9,6 +9,7 @@ import { populateOpenAIModels } from "@/scripts/populate-openai-models";
 import { populateGoogleModels } from "@/scripts/populate-google-models";
 import { populateDeepSeekModels } from "@/scripts/populate-deepseek-models";
 import { populateXaiModels } from "@/scripts/populate-xai-models";
+import { decrypt } from "@/lib/encryption/encrypt";
 
 // Input validation schemas
 const providerSchema = z
@@ -35,8 +36,9 @@ export const createAPIKey = async (key: string, provider: string) => {
     }
     // Encrypt the API key before storing
     const encryptedKey = await encrypt(validatedKey);
-    
+
     if (validatedProvider.toLowerCase() === "openrouter") {
+      console.log("Populating OpenRouter models");
       await populateOpenRouterModels();
     }
     if (validatedProvider.toLowerCase() === "anthropic") {
@@ -54,7 +56,6 @@ export const createAPIKey = async (key: string, provider: string) => {
     if (validatedProvider.toLowerCase() === "xai") {
       await populateXaiModels(validatedKey);
     }
-   
 
     const existingKey = await prisma.apiKey.findFirst({
       where: {
@@ -128,3 +129,92 @@ export const deleteAPIKey = async (keyId: string) => {
   }
 };
 
+export const refetchModelsForAllProviders = async () => {
+  try {
+    const { userId } = await checkUser();
+    if (!userId) {
+      throw new Error("Unauthorized");
+    }
+
+    // Get all user's API keys
+    const userApiKeys = await prisma.apiKey.findMany({
+      where: {
+        userId: userId,
+      },
+    });
+
+    if (userApiKeys.length === 0) {
+      throw new Error("No API keys found");
+    }
+
+    const results = [];
+    const errors = [];
+
+    // Process each API key and refetch models
+    for (const apiKey of userApiKeys) {
+      try {
+        const decryptedKey = await decrypt(apiKey.key);
+        const provider = apiKey.provider.toLowerCase();
+
+        console.log(`Refetching models for provider: ${provider}`);
+
+        // Delete existing models first so populate functions will run
+        switch (provider) {
+          case "openrouter":
+            await prisma.openRouterModel.deleteMany({});
+            await populateOpenRouterModels();
+            break;
+          case "anthropic":
+            await prisma.anthropicModel.deleteMany({});
+            await populateAnthropicModels(decryptedKey);
+            break;
+          case "openai":
+            await prisma.openaiModel.deleteMany({});
+            await populateOpenAIModels(decryptedKey);
+            break;
+          case "google":
+            await prisma.googleModel.deleteMany({});
+            await populateGoogleModels(decryptedKey);
+            break;
+          case "deepseek":
+            await prisma.deepSeekModel.deleteMany({});
+            await populateDeepSeekModels(decryptedKey);
+            break;
+          case "xai":
+            await prisma.xaiModel.deleteMany({});
+            await populateXaiModels(decryptedKey);
+            break;
+          default:
+            console.warn(`Unknown provider: ${provider}`);
+            continue;
+        }
+
+        results.push({
+          provider: provider,
+          success: true,
+          message: `Successfully refetched models for ${provider}`,
+        });
+      } catch (error) {
+        console.error(`Error refetching models for ${apiKey.provider}:`, error);
+        errors.push({
+          provider: apiKey.provider,
+          error: error instanceof Error ? error.message : "Unknown error",
+        });
+      }
+    }
+
+    return {
+      success: results,
+      errors: errors,
+      totalProviders: userApiKeys.length,
+      successCount: results.length,
+      errorCount: errors.length,
+    };
+  } catch (error) {
+    console.error("Error refetching models:", error);
+    if (error instanceof z.ZodError) {
+      throw new Error("Invalid input data");
+    }
+    throw new Error("Failed to refetch models");
+  }
+};
