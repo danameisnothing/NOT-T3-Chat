@@ -95,23 +95,25 @@
   --chat-overlay: hsla(309, 63%, 92%, var(--blur-fallback, 0.72));
   --wordmark-color: #ca0277;
 }
+
+/* T720: changed colors to match better */
 .dark {
   --background: 313.8 24.5% 10.4%;
   --foreground: 270 20% 97.8%;
   --card: 300 15.8% 3.7%;
-  --card-foreground: 240 4.8% 95.9%;
+  --card-foreground: #f4f4f5;
   --popover: 320 23.08% 5.1%;
-  --popover-foreground: 326 33% 96%;
+  --popover-foreground: #f8f1f5;
   --primary: 332 100% 32%;
-  --primary-foreground: 326 85% 90%;
+  --primary-foreground: #fbd0e8;
   --secondary: 273.8 15.1% 20.8%;
-  --secondary-foreground: 270 30% 83%;
+  --secondary-foreground: #d4c7e1;
   --muted: 283 9% 25%;
-  --muted-foreground: 326 33% 86%;
+  --muted-foreground: #e7d0dd;
   --accent: 272 20% 27%;
-  --accent-foreground: 326 33% 96%;
+  --accent-foreground: #f8f1f5;
   --destructive: 335.82 74.44% 35.29%;
-  --destructive-foreground: 0 0% 100%;
+  --destructive-foreground: #fff;
   --border: 262.5 10% 15.7%;
   --input: 326.3 20% 15.7%;
   --ring: 333.3, 71.4%, 50.6%;

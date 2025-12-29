@@ -209,7 +209,8 @@ export const ModelCard = memo(function ModelCard({
                       backgroundColor: colors.light,
                     }}
                   ></div>
-                  <div className="relative z-10">{capability.icon}</div>
+                  {/* T720: removed z-10, because it was causing the icon to appear at the top */}
+                  <div className="relative">{capability.icon}</div>
                 </div>
               );
             })}

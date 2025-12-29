@@ -7,30 +7,31 @@ interface SuggestionsProps {
   category: string;
 }
 
+// T720: changed suggestions to match latest
 const suggestionsByCategory = {
   create: [
-    "Write a creative short story about time travel",
-    "Help me brainstorm ideas for a mobile app",
-    "Create a meal plan for the week",
-    "Design a logo concept for my startup",
+    "Write a short story about a robot discovering emotions",
+    "Help me outline a sci-fi novel set in a post-apocalyptic world",
+    "Create a character profile for a complex villain with sympathetic motives",
+    "Give me 5 creative writing prompts for flash fiction",
   ],
   explore: [
-    "What are the latest breakthroughs in quantum computing?",
-    "Explain the mysteries of black holes",
-    "Tell me about ancient civilizations",
-    "What's happening in space exploration?",
+    "Good books for fans of Rick Rubin",
+    "Countries ranked by number of corgis",
+    "Most successful companies in the world",
+    "How much does Claude cost?",
   ],
   code: [
-    "Help me debug this React component",
-    "Explain the difference between REST and GraphQL",
-    "Write a Python function to sort an array",
-    "What are the best practices for database design?",
+    "Write code to invert a binary search tree in Python",
+    "What's the difference between Promise.all and Promise.allSettled?",
+    "Explain React's useEffect cleanup function",
+    "Best practices for error handling in async/await",
   ],
   learn: [
-    "How does machine learning work?",
-    "Teach me about photosynthesis",
-    "Explain cryptocurrency in simple terms",
-    "What are the fundamentals of investing?",
+    "Beginner's guide to TypeScript",
+    "Explain the CAP theorem in distributed systems",
+    "Why is AI so expensive?",
+    "Are black holes real?",
   ],
 };
 

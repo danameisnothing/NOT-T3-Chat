@@ -55,3 +55,5 @@ docker-data/.api_key_salt
 /local-attachment-store
 
 prisma/migrations
+
+package-lock.json
