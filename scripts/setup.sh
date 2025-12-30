@@ -76,5 +76,10 @@ npx prisma generate
 echo "🗄️ Setting up database..."
 npx prisma db push
 
+# T720: added notice to where you can get the ProximaVara variable font
+echo "T720: To get the ProximaVara font, go to either of these websites"
+echo "- https://ifonts.xyz/proxima-vara-font-family.html"
+echo "- https://fontforfree.com/proxima-vara-font-family"
+
 echo "✅ Setup complete! Your environment is ready."
 echo "💡 Run 'pnpm dev' to start the development server." 

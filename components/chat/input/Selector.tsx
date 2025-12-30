@@ -203,8 +203,8 @@ const ModelSelector = memo(function ModelSelector() {
       >
         <div className="flex items-center gap-2 text-sm">
           <div className="w-4 h-4 bg-muted-foreground/20 rounded"></div>
-          {/* T720: we use semibold instead, because font-medium has no effect? */}
-          <span className="font-semibold">No models available</span>
+          {/* T720: we use semibold instead, because font-medium has no effect? added text muted foreground */}
+          <span className="text-[var(--muted-foreground)] font-semibold">No models available</span>
         </div>
       </Button>
     );
@@ -216,7 +216,8 @@ const ModelSelector = memo(function ModelSelector() {
         <Button
           variant="ghost"
           size="sm"
-          className="text-xs h-auto gap-2 rounded-full border-secondary-foreground/10 py-1.5 pl-2 pr-2.5 text-muted-foreground max-sm:p-2"
+          // T720: added hover, removed text-muted-foreground
+          className="hover:text-[var(--foreground)] text-[var(--muted-foreground)] text-xs h-auto gap-2 rounded-full border-secondary-foreground/10 py-1.5 pl-2 pr-2.5 max-sm:p-2"
         >
           <div className="flex items-center gap-2 text-sm">
             {/* T720: we get rid of the model provider icon */}
@@ -258,7 +259,7 @@ const ModelSelector = memo(function ModelSelector() {
               <div className="flex w-full flex-wrap justify-start gap-3.5 pb-4 pl-3 pr-2 pt-2.5">
                 {/* Favorites Section */}
                 {/* T720 FIXME: the color is wrong in light mode */}
-                <div className="text-[#c46095] -mb-2 ml-0 flex w-full select-none items-center justify-start gap-1.5 text-color-heading">
+                <div className="text-[var(--heading)] -mb-2 ml-0 flex w-full select-none items-center justify-start gap-1.5 text-color-heading">
                   <Pin className="mt-px size-4" />
                   Favorites
                 </div>
@@ -275,7 +276,7 @@ const ModelSelector = memo(function ModelSelector() {
                 {filteredOthers.length > 0 && (
                   <>
                     {/* T720 FIXME: the color is wrong in light mode */}
-                    <div className="text-[#c46095] -mb-2 ml-2 mt-1 w-full select-none text-color-heading">
+                    <div className="text-[var(--heading)] -mb-2 ml-2 mt-1 w-full select-none">
                       Others
                     </div>
                     {filteredOthers.map((model) => (

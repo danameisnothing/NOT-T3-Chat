@@ -97,22 +97,29 @@
 }
 
 /* T720: changed colors to match better */
+/* T720: changed font */
+@font-face {
+  font-family: "Proxima Vara";
+  src: url("../public/fonts_custom/ProximaVara-VF.ttf") format("ttf");
+}
+
 .dark {
-  --background: 313.8 24.5% 10.4%;
-  --foreground: 270 20% 97.8%;
-  --card: 300 15.8% 3.7%;
+  font-family: 'Proxima Vara', sans-serif;
+  --background: #21141e;
+  --foreground: #f9f8fb;
+  --card: #0b080b;
   --card-foreground: #f4f4f5;
   --popover: 320 23.08% 5.1%;
   --popover-foreground: #f8f1f5;
-  --primary: 332 100% 32%;
+  --primary: #a3004c;
   --primary-foreground: #fbd0e8;
-  --secondary: 273.8 15.1% 20.8%;
+  --secondary: #362d3d;
   --secondary-foreground: #d4c7e1;
   --muted: 283 9% 25%;
   --muted-foreground: #e7d0dd;
   --accent: 272 20% 27%;
   --accent-foreground: #f8f1f5;
-  --destructive: 335.82 74.44% 35.29%;
+  --destructive: #9d174d;
   --destructive-foreground: #fff;
   --border: 262.5 10% 15.7%;
   --input: 326.3 20% 15.7%;
@@ -131,7 +138,7 @@
   --sidebar-border: 0 0% 0%;
   --sidebar-ring: 333.3, 71.4%, 50.6%;
   --gradient-noise-top: 309 15% 9%;
-  --heading: 328.2 38% 23%;
+  --heading: #c46095;
   --chat-border: 333.3 22% 16.1%;
   --chat-background: 270 16.13% 12.16%;
   --chat-accent: rgba(25, 21, 30, 0.86);

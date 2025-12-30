@@ -56,4 +56,6 @@ docker-data/.api_key_salt
 
 prisma/migrations
 
+# T720: added new stuff
 package-lock.json
+*.ttf

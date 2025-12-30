@@ -105,8 +105,9 @@ export function InputActions() {
             disabled={provider !== "google" && !imageCapableModels.includes(chatSettings?.model || "")}
             className={`text-xs h-auto gap-2 rounded-full border border-solid py-1.5 pl-2 pr-2.5 max-sm:p-2 ${
               isWebSearch
-                ? "border-primary bg-primary text-primary-foreground"
-                : "border-secondary-foreground/10 text-muted-foreground"
+                // T720: changed stuff i guess
+                ? "border-[var(--primary)] bg-[var(--primary)] text-[var(--primary-foreground)]"
+                : "border-secondary-foreground/10 text-[var(--muted-foreground)]"
             }`}
             aria-label={
               isWebSearch ? "Disable web search" : "Enable web search"

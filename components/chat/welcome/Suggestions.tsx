@@ -43,14 +43,16 @@ export function Suggestions({ onSelectSuggestion, category }: SuggestionsProps) 
       {suggestions.map((suggestion, index) => (
         <div
           key={index}
-          className="flex items-start gap-2 border-t border-secondary/40 py-1 first:border-none"
+          // T720: changed border-secondary
+          className="flex items-start gap-2 border-t border-[var(--secondary)]/40 py-1 first:border-none"
         >
           <Button
             variant="ghost"
             className="w-full rounded-md py-2 text-left text-secondary-foreground hover:bg-sidebar-accent/50 sm:px-3 justify-start"
             onClick={() => onSelectSuggestion(suggestion)}
           >
-            <span>{suggestion}</span>
+            {/* T720: added text color thing */}
+            <span className="text-[var(--secondary-foreground)]">{suggestion}</span>
           </Button>
         </div>
       ))}
